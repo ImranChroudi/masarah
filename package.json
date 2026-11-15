@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/swc-darwin-x64": "^16.4.6",
     "@supabase/supabase-js": "^2.119.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^4.2.1",
