@@ -74,7 +74,6 @@ export default function ProductForm({
       return () => URL.revokeObjectURL(u);
     }
   }, [file]);
-
   const toggleSize = (s: string) => {
     setSizes((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
   };
