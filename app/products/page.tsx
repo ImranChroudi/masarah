@@ -90,7 +90,7 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="min-h-screen overflow-hidden">
+    <div className="min-h-screen overflow-x-hidden">
       <header className="bg-white shadow-sm no-print sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 py-3 sm:py-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -193,43 +193,61 @@ export default function ProductsPage() {
           </div>
         )}
 
-        {/* Off-screen area captured for PDF export */}
+        {/*
+          Off-screen area captured for PDF export.
+          It sits inside a zero-size, clipped, fixed container so it never adds
+          scrollable width to the page (this was what made mobile too wide in RTL).
+        */}
         <div
-          ref={printRef}
-          className="bg-white p-6"
-          style={{ position: 'absolute', left: '-10000px', top: 0, width: '794px' }}
+          aria-hidden="true"
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: 0,
+            height: 0,
+            overflow: 'hidden',
+            pointerEvents: 'none',
+          }}
         >
-          <h2 className="text-2xl font-bold mb-4 text-center">قائمة المنتجات</h2>
-          <table className="w-full border-collapse text-sm" dir="rtl">
-            <thead>
-              <tr className="bg-gray-200">
-                <th className="border p-2">الصورة</th>
-                <th className="border p-2">القطعة</th>
-                <th className="border p-2">الثمن (درهم)</th>
-                <th className="border p-2">المقاييس</th>
-                <th className="border p-2">اللون</th>
-                <th className="border p-2">ملاحظة</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((p) => (
-                <tr key={p.id}>
-                  <td className="border p-2">
-                    {p.image_url ? (
-                      <img src={p.image_url} alt={p.name} crossOrigin="anonymous" style={{ width: 60, height: 60, objectFit: 'cover' }} />
-                    ) : (
-                      '-'
-                    )}
-                  </td>
-                  <td className="border p-2">{p.name}</td>
-                  <td className="border p-2">{p.price}</td>
-                  <td className="border p-2">{(p.sizes || []).join('، ')}</td>
-                  <td className="border p-2">{p.color}</td>
-                  <td className="border p-2">{p.note}</td>
+          <div ref={printRef} className="bg-white p-6" style={{ width: '794px' }} dir="rtl">
+            <h2 className="text-2xl font-bold mb-4 text-center">قائمة المنتجات</h2>
+            <table className="w-full border-collapse text-sm" dir="rtl">
+              <thead>
+                <tr className="bg-gray-200">
+                  <th className="border p-2">الصورة</th>
+                  <th className="border p-2">القطعة</th>
+                  <th className="border p-2">الثمن (درهم)</th>
+                  <th className="border p-2">المقاييس</th>
+                  <th className="border p-2">اللون</th>
+                  <th className="border p-2">ملاحظة</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {products.map((p) => (
+                  <tr key={p.id}>
+                    <td className="border p-2">
+                      {p.image_url ? (
+                        <img
+                          src={p.image_url}
+                          alt={p.name}
+                          crossOrigin="anonymous"
+                          style={{ width: 60, height: 60, objectFit: 'cover' }}
+                        />
+                      ) : (
+                        '-'
+                      )}
+                    </td>
+                    <td className="border p-2">{p.name}</td>
+                    <td className="border p-2">{p.price}</td>
+                    <td className="border p-2">{(p.sizes || []).join('، ')}</td>
+                    <td className="border p-2">{p.color}</td>
+                    <td className="border p-2">{p.note}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </main>
 
