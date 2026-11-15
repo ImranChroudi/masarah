@@ -90,7 +90,7 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-hidden">
       <header className="bg-white shadow-sm no-print sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 py-3 sm:py-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
