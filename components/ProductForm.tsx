@@ -66,7 +66,6 @@ export default function ProductForm({
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(initial?.image_url || null);
   const [saving, setSaving] = useState(false);
-
   useEffect(() => {
     if (file) {
       const u = URL.createObjectURL(file);
